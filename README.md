@@ -95,7 +95,21 @@ transformer = SpatialLagTransformer(
 df["price_spatial_lag"] = transformer.fit_transform(df)
 ```
 
-### 3. Spatial Autocorrelation (Moran's I)
+### 3. Discrete Spatial Indexing (Geohash)
+
+```python
+from geostride.indexing import encode_geohash, geohash_neighbors, geohash_bbox
+
+# Encode coordinate into a 7-character Geohash (~150m cell)
+gh = encode_geohash(latitude=40.7128, longitude=-74.0060, precision=7)
+print(f"Geohash: {gh}")
+
+# Retrieve all 8 adjacent neighbor cells
+neighbors = geohash_neighbors(gh)
+print(f"North neighbor: {neighbors['n']}")
+```
+
+### 4. Spatial Autocorrelation (Moran's I)
 
 ```python
 from geostride.stats import global_moran
@@ -126,7 +140,8 @@ geostride/
 ## Roadmap
 
 - [x] Core geodetic distance algorithms (Haversine, Vincenty, Manhattan)
-- [ ] Bitwise Geohash and Morton space-filling curve indexing
+- [x] Bitwise Geohash indexing and 8-direction neighbor search
+- [ ] Morton space-filling curve (Z-order) indexing
 - [ ] Inverse Distance Weighting (IDW) & KNN Spatial Lag Transformers
 - [ ] Global & Local Moran's I with permutation tests
 - [ ] Getis-Ord $G_i^*$ spatial hot-spot analysis
