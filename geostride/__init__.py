@@ -10,6 +10,11 @@ from geostride.indexing.geohash import (
     geohash_bbox,
     geohash_neighbors,
 )
+from geostride.indexing.morton import (
+    decode_morton_2d,
+    encode_coordinates_morton,
+    encode_morton_2d,
+)
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
@@ -19,8 +24,11 @@ __all__ = [
     "Coordinate",
     "__version__",
     "decode_geohash",
+    "decode_morton_2d",
     "encode_coordinates_geohash",
+    "encode_coordinates_morton",
     "encode_geohash",
+    "encode_morton_2d",
     "geohash_bbox",
     "geohash_neighbors",
     "haversine_matrix",
