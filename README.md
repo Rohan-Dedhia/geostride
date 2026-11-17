@@ -6,7 +6,7 @@
 
 **GeoStride** is a lightweight, pure-Python / NumPy & Pandas library for geospatial feature engineering, spatial autocorrelation, spatial clustering, and discrete spatial indexing.
 
-Standard geospatial frameworks (`geopandas`, `shapely`, `pysal`, `gdal`) often rely on complex C/C++ bindings (`GEOS`, `GDAL`, `PROJ`) that are difficult to install or maintain in resource-constrained environments (e.g., serverless AWS Lambda, minimal Docker containers, or edge devices). **GeoStride** bridges this gap by providing high-performance, vectorized geospatial algorithms built strictly on top of `numpy`, `pandas`, and `scipy`.
+Comprehensive geospatial stacks (such as `geopandas`, `shapely`, and `pyproj`) frequently depend on external compiled C/C++ libraries (`GEOS`, `PROJ`, `GDAL`), which can present installation and dependency challenges in resource-constrained environments (e.g., lightweight serverless functions, minimal Docker containers, or edge deployments). **GeoStride** provides a focused, pure-Python suite of vectorized geospatial utilities built directly on `numpy`, `pandas`, and `scipy`.
 
 ---
 
