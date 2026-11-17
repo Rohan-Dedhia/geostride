@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geostride"
+version = "0.1.0"
+description = "Lightweight geospatial feature engineering, spatial autocorrelation, and discrete spatial indexing for Python."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Rohan Dedhia", email = "rohandedhia13@gmail.com" }
+]
+keywords = [
+    "geospatial",
+    "spatial-analysis",
+    "feature-engineering",
+    "machine-learning",
+    "geohash",
+    "moran-i",
+    "spatial-lags"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scipy>=1.10.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0"
+]
+viz = [
+    "folium>=0.14.0",
+    "matplotlib>=3.7.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/Rohan-Dedhia/geostride"
+Repository = "https://github.com/Rohan-Dedhia/geostride"
+Issues = "https://github.com/Rohan-Dedhia/geostride/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["geostride*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
