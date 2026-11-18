@@ -19,6 +19,7 @@ from geostride.indexing.morton import (
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
+from geostride.stats.moran import MoranResult, global_moran
 from geostride.stats.weights import (
     SpatialWeights,
     distance_band_weights,
@@ -29,6 +30,7 @@ from geostride.stats.weights import (
 __all__ = [
     "BoundingBox",
     "Coordinate",
+    "MoranResult",
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",
@@ -41,6 +43,7 @@ __all__ = [
     "encode_morton_2d",
     "geohash_bbox",
     "geohash_neighbors",
+    "global_moran",
     "haversine_matrix",
     "haversine_pairwise",
     "inverse_distance_weights",
