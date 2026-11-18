@@ -142,6 +142,21 @@ geojson_data = dataframe_to_geojson(df, lat_col="latitude", lon_col="longitude")
 recovered_df = geojson_to_dataframe(geojson_data)
 ```
 
+### 7. Interactive Leaflet HTML Map Export
+
+```python
+from geostride.viz import export_html_map
+
+# Export interactive Leaflet HTML map viewable in any browser without a web server
+export_html_map(
+    "nyc_clusters.html",
+    coords=df[["latitude", "longitude"]].values,
+    labels=df["cluster_id"].values,
+    tooltips=[f"Price: ${p:,.0f}" for p in df["house_price"]],
+    title="NYC Housing Spatial Clusters"
+)
+```
+
 ---
 
 ## Benchmarks
@@ -190,7 +205,8 @@ geostride/
 - [x] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [x] BallTree-accelerated spatial DBSCAN clustering
 - [x] Zero-dependency GeoJSON and WKT parser & serializer
-- [ ] Self-contained interactive Leaflet visualization generator
+- [x] Self-contained interactive Leaflet visualization generator
+- [ ] Discrete hexagonal (H3-style) spatial tessellation generator
 - [ ] Full Scikit-Learn pipeline compatibility benchmarks
 
 ---

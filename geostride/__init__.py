@@ -34,6 +34,7 @@ from geostride.stats.weights import (
     inverse_distance_weights,
     knn_weights,
 )
+from geostride.viz.map_export import export_html_map, render_html_map
 
 __all__ = [
     "BoundingBox",
@@ -53,6 +54,7 @@ __all__ = [
     "encode_coordinates_morton",
     "encode_geohash",
     "encode_morton_2d",
+    "export_html_map",
     "geohash_bbox",
     "geohash_neighbors",
     "geojson_to_dataframe",
@@ -63,6 +65,7 @@ __all__ = [
     "inverse_distance_weights",
     "knn_weights",
     "load_geojson",
+    "render_html_map",
     "spatial_dbscan",
     "spatial_lag_knn",
     "spatial_manhattan_distance",
