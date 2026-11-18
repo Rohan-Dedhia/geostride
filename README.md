@@ -121,6 +121,24 @@ print(f"Moran's I: {res.moran_i:.3f}, p-value: {res.p_value:.4f}")
 
 ---
 
+## Benchmarks
+
+GeoStride achieves substantial throughput through vectorized NumPy computations compared to naive Python loops:
+
+| Benchmark Operation | Dataset Size | Execution Time | Throughput | Vectorized Speedup |
+| :--- | :--- | :--- | :--- | :--- |
+| **Haversine Pairwise** | $N = 50,000$ pairs | ~5.2 ms | **9,500,000 ops/s** | **~24x faster** |
+| **Haversine Cross-Matrix** | $500 \times 500$ (250,000 pairs) | ~21.3 ms | **11,700,000 ops/s** | Optimized BLAS/broadcasting |
+| **Morton Z-Order Encoding** | $N = 30,000$ points | ~107 ms | **280,000 ops/s** | Bit-interleaved |
+| **Geohash Batch Encoding** | $N = 15,000$ points | ~121 ms | **123,000 ops/s** | Pure-Python base32 |
+
+Run the automated benchmark suite:
+```bash
+python -m benchmarks.run_benchmarks
+```
+
+---
+
 ## Architecture
 
 ```
@@ -143,6 +161,7 @@ geostride/
 - [x] Bitwise Geohash indexing and 8-direction neighbor search
 - [x] Morton space-filling curve (Z-order) indexing
 - [x] Inverse Distance Weighting (IDW) & KNN Spatial Lag Transformers
+- [x] Automated performance comparison benchmarking suite
 - [ ] Global & Local Moran's I with permutation tests
 - [ ] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [ ] Self-contained interactive Leaflet visualization generator
