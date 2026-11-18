@@ -3,8 +3,6 @@
 import numpy as np
 import pandas as pd
 import pytest
-from sklearn.linear_model import Ridge
-from sklearn.model_selection import cross_val_score
 
 from geostride.features.lags import SpatialLagTransformer
 from geostride.features.splitters import SpatialKFold
@@ -108,6 +106,10 @@ def test_spatial_kfold_invalid_params(spatial_dataset):
 
 
 def test_spatial_kfold_cross_val_score(spatial_dataset):
+    pytest.importorskip("sklearn")
+    from sklearn.linear_model import Ridge
+    from sklearn.model_selection import cross_val_score
+
     # End-to-end integration with scikit-learn cross_val_score
     X = spatial_dataset[["latitude", "longitude", "feature1", "feature2"]]
     y = spatial_dataset["target"]
@@ -120,6 +122,8 @@ def test_spatial_kfold_cross_val_score(spatial_dataset):
 
 
 def test_spatial_kfold_pipeline_integration(spatial_dataset):
+    pytest.importorskip("sklearn")
+
     # Full Scikit-Learn Pipeline test with SpatialLagTransformer
     X = spatial_dataset[["latitude", "longitude", "feature1", "feature2"]]
     y = spatial_dataset["target"]
