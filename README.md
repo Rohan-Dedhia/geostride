@@ -164,7 +164,7 @@ geostride/
 - [x] Automated performance comparison benchmarking suite
 - [x] Spatial weight matrix generators (KNN, distance band, inverse distance)
 - [x] Global & Local Moran's I with permutation tests
-- [ ] Getis-Ord $G_i^*$ spatial hot-spot analysis
+- [x] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [ ] Self-contained interactive Leaflet visualization generator
 - [ ] Full Scikit-Learn pipeline compatibility benchmarks
 
