@@ -5,6 +5,7 @@ from geostride.cluster.dbscan import SpatialDBSCANResult, spatial_dbscan
 from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
+from geostride.features.splitters import SpatialKFold
 from geostride.indexing.geohash import (
     decode_geohash,
     encode_coordinates_geohash,
@@ -49,6 +50,7 @@ __all__ = [
     "GetisOrdResult",
     "MoranResult",
     "SpatialDBSCANResult",
+    "SpatialKFold",
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",

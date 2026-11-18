@@ -10,6 +10,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from geostride.features.lags import spatial_lag_knn
+from geostride.features.splitters import SpatialKFold
 from geostride.indexing.geohash import encode_coordinates_geohash
 from geostride.indexing.morton import encode_coordinates_morton
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
@@ -182,6 +183,27 @@ def benchmark_spatial_lag(n_samples: int = 1_000, k: int = 5) -> BenchmarkResult
     )
 
 
+def benchmark_spatial_kfold(n_samples: int = 20_000, n_splits: int = 5) -> BenchmarkResult:
+    """Benchmark SpatialKFold cross-validation partitioning."""
+    rng = np.random.default_rng(42)
+    coords = np.column_stack([
+        rng.uniform(40.0, 42.0, n_samples),
+        rng.uniform(-74.5, -73.5, n_samples),
+    ])
+    cv = SpatialKFold(n_splits=n_splits, method="morton")
+
+    dur_ms = _time_callable(
+        lambda: list(cv.split(coords)),
+        repeats=3,
+    )
+    return BenchmarkResult(
+        operation=f"SpatialKFold Partitioning (k={n_splits})",
+        dataset_size=n_samples,
+        duration_ms=dur_ms,
+        throughput_ops_sec=(n_samples / (dur_ms / 1000.0)),
+    )
+
+
 def run_all_benchmarks() -> list[BenchmarkResult]:
     """Execute all benchmark suites and return aggregate results."""
     results: list[BenchmarkResult] = []
@@ -190,6 +212,7 @@ def run_all_benchmarks() -> list[BenchmarkResult]:
     results.append(benchmark_geohash_indexing())
     results.append(benchmark_morton_indexing())
     results.append(benchmark_spatial_lag())
+    results.append(benchmark_spatial_kfold())
     return results
 
 

@@ -6,6 +6,7 @@ from benchmarks.run_benchmarks import (
     benchmark_haversine_matrix,
     benchmark_haversine_pairwise,
     benchmark_morton_indexing,
+    benchmark_spatial_kfold,
     benchmark_spatial_lag,
     run_all_benchmarks,
 )
@@ -58,7 +59,13 @@ def test_benchmark_spatial_lag_smoke():
     assert res.duration_ms > 0
 
 
+def test_benchmark_spatial_kfold_smoke():
+    res = benchmark_spatial_kfold(n_samples=100, n_splits=3)
+    assert res.dataset_size == 100
+    assert res.duration_ms > 0
+
+
 def test_run_all_benchmarks():
     # Verify the full aggregator returns all benchmark results
     results = run_all_benchmarks()
-    assert len(results) >= 6
+    assert len(results) >= 7
