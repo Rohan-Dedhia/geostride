@@ -142,7 +142,7 @@ geostride/
 - [x] Core geodetic distance algorithms (Haversine, Vincenty, Manhattan)
 - [x] Bitwise Geohash indexing and 8-direction neighbor search
 - [x] Morton space-filling curve (Z-order) indexing
-- [ ] Inverse Distance Weighting (IDW) & KNN Spatial Lag Transformers
+- [x] Inverse Distance Weighting (IDW) & KNN Spatial Lag Transformers
 - [ ] Global & Local Moran's I with permutation tests
 - [ ] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [ ] Self-contained interactive Leaflet visualization generator
