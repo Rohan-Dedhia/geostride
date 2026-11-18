@@ -7,6 +7,13 @@ from geostride.indexing.geohash import (
     geohash_bbox,
     geohash_neighbors,
 )
+from geostride.indexing.hexagon import (
+    bin_coordinates_hex,
+    coord_to_hex_cell,
+    hex_cell_to_centroid,
+    hex_cell_to_polygon,
+    hex_neighbors,
+)
 from geostride.indexing.morton import (
     decode_morton_2d,
     encode_coordinates_morton,
@@ -14,6 +21,8 @@ from geostride.indexing.morton import (
 )
 
 __all__ = [
+    "bin_coordinates_hex",
+    "coord_to_hex_cell",
     "decode_geohash",
     "decode_morton_2d",
     "encode_coordinates_geohash",
@@ -22,4 +31,7 @@ __all__ = [
     "encode_morton_2d",
     "geohash_bbox",
     "geohash_neighbors",
+    "hex_cell_to_centroid",
+    "hex_cell_to_polygon",
+    "hex_neighbors",
 ]

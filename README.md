@@ -157,6 +157,19 @@ export_html_map(
 )
 ```
 
+### 8. Discrete Hexagonal Binning (H3-Style)
+
+```python
+from geostride.indexing import bin_coordinates_hex, coord_to_hex_cell
+
+# Map individual point to axial hexagonal grid cell (q, r)
+q, r = coord_to_hex_cell(40.7128, -74.0060, edge_km=2.0)
+
+# Aggregate thousands of coordinates into discrete equal-area hexagonal bins
+hex_bins = bin_coordinates_hex(df[["latitude", "longitude"]].values, edge_km=2.0)
+print(hex_bins.head())
+```
+
 ---
 
 ## Benchmarks
@@ -206,7 +219,7 @@ geostride/
 - [x] BallTree-accelerated spatial DBSCAN clustering
 - [x] Zero-dependency GeoJSON and WKT parser & serializer
 - [x] Self-contained interactive Leaflet visualization generator
-- [ ] Discrete hexagonal (H3-style) spatial tessellation generator
+- [x] Discrete hexagonal (H3-style) spatial tessellation generator
 - [ ] Full Scikit-Learn pipeline compatibility benchmarks
 
 ---

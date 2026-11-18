@@ -12,6 +12,13 @@ from geostride.indexing.geohash import (
     geohash_bbox,
     geohash_neighbors,
 )
+from geostride.indexing.hexagon import (
+    bin_coordinates_hex,
+    coord_to_hex_cell,
+    hex_cell_to_centroid,
+    hex_cell_to_polygon,
+    hex_neighbors,
+)
 from geostride.indexing.morton import (
     decode_morton_2d,
     encode_coordinates_morton,
@@ -45,6 +52,8 @@ __all__ = [
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",
+    "bin_coordinates_hex",
+    "coord_to_hex_cell",
     "dataframe_to_geojson",
     "decode_geohash",
     "decode_morton_2d",
@@ -62,6 +71,9 @@ __all__ = [
     "global_moran",
     "haversine_matrix",
     "haversine_pairwise",
+    "hex_cell_to_centroid",
+    "hex_cell_to_polygon",
+    "hex_neighbors",
     "inverse_distance_weights",
     "knn_weights",
     "load_geojson",
