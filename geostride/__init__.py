@@ -17,6 +17,12 @@ from geostride.indexing.morton import (
     encode_coordinates_morton,
     encode_morton_2d,
 )
+from geostride.io.geojson import (
+    dataframe_to_geojson,
+    dump_geojson,
+    geojson_to_dataframe,
+    load_geojson,
+)
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
@@ -38,21 +44,25 @@ __all__ = [
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",
+    "dataframe_to_geojson",
     "decode_geohash",
     "decode_morton_2d",
     "distance_band_weights",
+    "dump_geojson",
     "encode_coordinates_geohash",
     "encode_coordinates_morton",
     "encode_geohash",
     "encode_morton_2d",
     "geohash_bbox",
     "geohash_neighbors",
+    "geojson_to_dataframe",
     "getis_ord_local",
     "global_moran",
     "haversine_matrix",
     "haversine_pairwise",
     "inverse_distance_weights",
     "knn_weights",
+    "load_geojson",
     "spatial_dbscan",
     "spatial_lag_knn",
     "spatial_manhattan_distance",

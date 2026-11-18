@@ -130,6 +130,18 @@ print(f"Clusters discovered: {clusters.n_clusters}")
 print(f"Noise ratio: {clusters.noise_ratio:.1%}")
 ```
 
+### 6. Zero-Dependency GeoJSON Serialization
+
+```python
+from geostride.io import dataframe_to_geojson, geojson_to_dataframe
+
+# Convert Pandas DataFrame directly to RFC 7946 FeatureCollection
+geojson_data = dataframe_to_geojson(df, lat_col="latitude", lon_col="longitude")
+
+# Parse GeoJSON back into a flat DataFrame
+recovered_df = geojson_to_dataframe(geojson_data)
+```
+
 ---
 
 ## Benchmarks
@@ -177,6 +189,7 @@ geostride/
 - [x] Global & Local Moran's I with permutation tests
 - [x] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [x] BallTree-accelerated spatial DBSCAN clustering
+- [x] Zero-dependency GeoJSON and WKT parser & serializer
 - [ ] Self-contained interactive Leaflet visualization generator
 - [ ] Full Scikit-Learn pipeline compatibility benchmarks
 
