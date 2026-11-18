@@ -119,6 +119,17 @@ res = global_moran(coords=df[["latitude", "longitude"]].values, values=df["house
 print(f"Moran's I: {res.moran_i:.3f}, p-value: {res.p_value:.4f}")
 ```
 
+### 5. Spatial DBSCAN Clustering
+
+```python
+from geostride.cluster import spatial_dbscan
+
+# Cluster coordinates within 2.0 km with at least 5 points
+clusters = spatial_dbscan(df[["latitude", "longitude"]].values, eps_km=2.0, min_samples=5)
+print(f"Clusters discovered: {clusters.n_clusters}")
+print(f"Noise ratio: {clusters.noise_ratio:.1%}")
+```
+
 ---
 
 ## Benchmarks
@@ -165,6 +176,7 @@ geostride/
 - [x] Spatial weight matrix generators (KNN, distance band, inverse distance)
 - [x] Global & Local Moran's I with permutation tests
 - [x] Getis-Ord $G_i^*$ spatial hot-spot analysis
+- [x] BallTree-accelerated spatial DBSCAN clustering
 - [ ] Self-contained interactive Leaflet visualization generator
 - [ ] Full Scikit-Learn pipeline compatibility benchmarks
 

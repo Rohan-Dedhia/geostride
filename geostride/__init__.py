@@ -1,6 +1,7 @@
 """GeoStride: Lightweight geospatial feature engineering and analytics for Python."""
 
 from geostride._version import __version__
+from geostride.cluster.dbscan import SpatialDBSCANResult, spatial_dbscan
 from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
@@ -33,6 +34,7 @@ __all__ = [
     "Coordinate",
     "GetisOrdResult",
     "MoranResult",
+    "SpatialDBSCANResult",
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",
@@ -51,6 +53,7 @@ __all__ = [
     "haversine_pairwise",
     "inverse_distance_weights",
     "knn_weights",
+    "spatial_dbscan",
     "spatial_lag_knn",
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
