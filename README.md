@@ -162,6 +162,7 @@ geostride/
 - [x] Morton space-filling curve (Z-order) indexing
 - [x] Inverse Distance Weighting (IDW) & KNN Spatial Lag Transformers
 - [x] Automated performance comparison benchmarking suite
+- [x] Spatial weight matrix generators (KNN, distance band, inverse distance)
 - [ ] Global & Local Moran's I with permutation tests
 - [ ] Getis-Ord $G_i^*$ spatial hot-spot analysis
 - [ ] Self-contained interactive Leaflet visualization generator

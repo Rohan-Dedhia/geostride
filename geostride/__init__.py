@@ -19,14 +19,22 @@ from geostride.indexing.morton import (
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
+from geostride.stats.weights import (
+    SpatialWeights,
+    distance_band_weights,
+    inverse_distance_weights,
+    knn_weights,
+)
 
 __all__ = [
     "BoundingBox",
     "Coordinate",
     "SpatialLagTransformer",
+    "SpatialWeights",
     "__version__",
     "decode_geohash",
     "decode_morton_2d",
+    "distance_band_weights",
     "encode_coordinates_geohash",
     "encode_coordinates_morton",
     "encode_geohash",
@@ -35,6 +43,8 @@ __all__ = [
     "geohash_neighbors",
     "haversine_matrix",
     "haversine_pairwise",
+    "inverse_distance_weights",
+    "knn_weights",
     "spatial_lag_knn",
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
