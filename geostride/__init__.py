@@ -32,6 +32,7 @@ from geostride.indexing.morton import (
     encode_coordinates_morton,
     encode_morton_2d,
 )
+from geostride.indexing.rtree import SpatialRTree
 from geostride.indexing.voronoi import (
     SphericalVoronoiResult,
     spherical_voronoi,
@@ -64,6 +65,7 @@ __all__ = [
     "SpatialDBSCANResult",
     "SpatialKFold",
     "SpatialLagTransformer",
+    "SpatialRTree",
     "SpatialWeights",
     "SphericalVoronoiResult",
     "__version__",

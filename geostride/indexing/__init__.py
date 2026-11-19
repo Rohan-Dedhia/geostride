@@ -19,6 +19,7 @@ from geostride.indexing.morton import (
     encode_coordinates_morton,
     encode_morton_2d,
 )
+from geostride.indexing.rtree import SpatialRTree
 from geostride.indexing.voronoi import (
     SphericalVoronoiResult,
     spherical_voronoi,
@@ -26,6 +27,7 @@ from geostride.indexing.voronoi import (
 )
 
 __all__ = [
+    "SpatialRTree",
     "SphericalVoronoiResult",
     "bin_coordinates_hex",
     "coord_to_hex_cell",

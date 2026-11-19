@@ -233,6 +233,29 @@ print(f"Points inside district: {in_district_mask.sum()} / {len(coords)}")
 district_ids = points_in_polygons(coords, [district_boundary])
 ```
 
+### 13. Pure-Python Spatial R-Tree Indexing
+
+```python
+from geostride.indexing import SpatialRTree
+
+# Initialize hierarchical R-Tree indexer (zero external C dependencies)
+rtree = SpatialRTree(max_entries=16, min_entries=4)
+
+# Bulk load spatial features via Sort-Tile-Recursive (STR) packing
+feature_ids = list(df.index)
+bboxes = [
+    (lat - 0.01, lat + 0.01, lon - 0.01, lon + 0.01)
+    for lat, lon in df[["latitude", "longitude"]].values
+]
+rtree.bulk_load(feature_ids, bboxes)
+
+# Fast spatial range intersection query
+nearby_ids = rtree.query_range((40.71, 40.75, -74.01, -73.97))
+
+# Best-first branch-and-bound k-nearest neighbor retrieval
+nearest_3 = rtree.query_nearest(latitude=40.7128, longitude=-74.0060, k=3)
+```
+
 ---
 
 ## Benchmarks
@@ -290,7 +313,9 @@ geostride/
 - [x] GitHub Actions multi-OS test matrix and automated code quality verification
 - [x] Spherical Voronoi diagram generator (`geostride.indexing.voronoi`)
 - [x] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
-- [ ] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
+- [x] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
+- [ ] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
+- [ ] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
 
 ---
 
