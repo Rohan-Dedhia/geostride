@@ -183,6 +183,20 @@ scores = cross_val_score(Ridge(), X=df[["latitude", "longitude", "feature1"]], y
 print(f"Spatial CV R^2: {scores.mean():.3f} +/- {scores.std():.3f}")
 ```
 
+### 10. Cluster Boundary Envelopes (Convex & Concave Hulls)
+
+```python
+from geostride.cluster import alpha_shape_concave_hull, convex_hull_2d, polygon_area_km2
+
+# Compute minimum convex bounding polygon
+convex_hull = convex_hull_2d(df[["latitude", "longitude"]].values)
+print(f"Convex Area: {polygon_area_km2(convex_hull):.1f} km^2")
+
+# Extract tight non-convex alpha-shape boundary around irregular urban clusters
+concave_rings = alpha_shape_concave_hull(df[["latitude", "longitude"]].values, alpha=0.5)
+print(f"Concave Area: {polygon_area_km2(concave_rings[0]):.1f} km^2")
+```
+
 ---
 
 ## Benchmarks
@@ -235,7 +249,7 @@ geostride/
 - [x] Self-contained interactive Leaflet visualization generator
 - [x] Discrete hexagonal (H3-style) spatial tessellation generator
 - [x] Full Scikit-Learn pipeline compatibility benchmarks
-- [ ] Convex and concave alpha-shape cluster boundary hull generator
+- [x] Convex and concave alpha-shape cluster boundary hull generator
 - [ ] GitHub Actions multi-OS test matrix and automated code quality verification
 
 ---

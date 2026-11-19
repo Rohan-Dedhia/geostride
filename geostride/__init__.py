@@ -2,6 +2,12 @@
 
 from geostride._version import __version__
 from geostride.cluster.dbscan import SpatialDBSCANResult, spatial_dbscan
+from geostride.cluster.hulls import (
+    alpha_shape_concave_hull,
+    convex_hull_2d,
+    hull_to_geojson,
+    polygon_area_km2,
+)
 from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
@@ -54,7 +60,9 @@ __all__ = [
     "SpatialLagTransformer",
     "SpatialWeights",
     "__version__",
+    "alpha_shape_concave_hull",
     "bin_coordinates_hex",
+    "convex_hull_2d",
     "coord_to_hex_cell",
     "dataframe_to_geojson",
     "decode_geohash",
@@ -76,9 +84,11 @@ __all__ = [
     "hex_cell_to_centroid",
     "hex_cell_to_polygon",
     "hex_neighbors",
+    "hull_to_geojson",
     "inverse_distance_weights",
     "knn_weights",
     "load_geojson",
+    "polygon_area_km2",
     "render_html_map",
     "spatial_dbscan",
     "spatial_lag_knn",
