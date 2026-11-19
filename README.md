@@ -256,6 +256,26 @@ nearby_ids = rtree.query_range((40.71, 40.75, -74.01, -73.97))
 nearest_3 = rtree.query_nearest(latitude=40.7128, longitude=-74.0060, k=3)
 ```
 
+### 14. Local Indicators of Spatial Association (LISA)
+
+```python
+from geostride.stats import local_moran
+
+# Decompose spatial autocorrelation into local hot spots and spatial outliers
+lisa_res = local_moran(
+    coords=df[["latitude", "longitude"]].values,
+    values=df["house_price"].values,
+    k_neighbors=5,
+    n_permutations=999,
+    p_threshold=0.05
+)
+
+print(f"High-High Hot Spots: {len(lisa_res.high_high)}")
+print(f"Low-Low Cold Spots: {len(lisa_res.low_low)}")
+print(f"High-Low Outliers: {len(lisa_res.high_low)}")
+print(f"Low-High Outliers: {len(lisa_res.low_high)}")
+```
+
 ---
 
 ## Benchmarks
@@ -314,8 +334,9 @@ geostride/
 - [x] Spherical Voronoi diagram generator (`geostride.indexing.voronoi`)
 - [x] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
 - [x] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
-- [ ] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
+- [x] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
 - [ ] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
+- [ ] Vectorized spatial join (`sjoin`) for polygons and point proximity
 
 ---
 

@@ -48,6 +48,7 @@ from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
 from geostride.stats.getis_ord import GetisOrdResult, getis_ord_local
+from geostride.stats.lisa import LISAResult, local_moran
 from geostride.stats.moran import MoranResult, global_moran
 from geostride.stats.weights import (
     SpatialWeights,
@@ -61,6 +62,7 @@ __all__ = [
     "BoundingBox",
     "Coordinate",
     "GetisOrdResult",
+    "LISAResult",
     "MoranResult",
     "SpatialDBSCANResult",
     "SpatialKFold",
@@ -97,6 +99,7 @@ __all__ = [
     "inverse_distance_weights",
     "knn_weights",
     "load_geojson",
+    "local_moran",
     "point_in_polygon",
     "points_in_polygons",
     "polygon_area_km2",
