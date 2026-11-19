@@ -19,8 +19,14 @@ from geostride.indexing.morton import (
     encode_coordinates_morton,
     encode_morton_2d,
 )
+from geostride.indexing.voronoi import (
+    SphericalVoronoiResult,
+    spherical_voronoi,
+    voronoi_to_geojson,
+)
 
 __all__ = [
+    "SphericalVoronoiResult",
     "bin_coordinates_hex",
     "coord_to_hex_cell",
     "decode_geohash",
@@ -34,4 +40,6 @@ __all__ = [
     "hex_cell_to_centroid",
     "hex_cell_to_polygon",
     "hex_neighbors",
+    "spherical_voronoi",
+    "voronoi_to_geojson",
 ]

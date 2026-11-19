@@ -198,6 +198,19 @@ concave_rings = alpha_shape_concave_hull(df[["latitude", "longitude"]].values, a
 print(f"Concave Area: {polygon_area_km2(concave_rings[0]):.1f} km^2")
 ```
 
+### 11. Spherical Voronoi Tessellation
+
+```python
+from geostride.indexing import spherical_voronoi, voronoi_to_geojson
+
+# Partition the Earth into exact spherical Voronoi service territories
+voronoi_res = spherical_voronoi(df[["latitude", "longitude"]].values)
+print(f"Total partitioned area: {voronoi_res.total_area_km2:,.0f} km^2")
+
+# Export Voronoi polygons directly to GeoJSON
+geojson_voronoi = voronoi_to_geojson(voronoi_res)
+```
+
 ---
 
 ## Benchmarks
@@ -252,7 +265,7 @@ geostride/
 - [x] Full Scikit-Learn pipeline compatibility benchmarks
 - [x] Convex and concave alpha-shape cluster boundary hull generator
 - [x] GitHub Actions multi-OS test matrix and automated code quality verification
-- [ ] Spherical Voronoi diagram generator (`geostride.indexing.voronoi`)
+- [x] Spherical Voronoi diagram generator (`geostride.indexing.voronoi`)
 - [ ] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
 - [ ] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
 

@@ -31,6 +31,11 @@ from geostride.indexing.morton import (
     encode_coordinates_morton,
     encode_morton_2d,
 )
+from geostride.indexing.voronoi import (
+    SphericalVoronoiResult,
+    spherical_voronoi,
+    voronoi_to_geojson,
+)
 from geostride.io.geojson import (
     dataframe_to_geojson,
     dump_geojson,
@@ -59,6 +64,7 @@ __all__ = [
     "SpatialKFold",
     "SpatialLagTransformer",
     "SpatialWeights",
+    "SphericalVoronoiResult",
     "__version__",
     "alpha_shape_concave_hull",
     "bin_coordinates_hex",
@@ -94,7 +100,9 @@ __all__ = [
     "spatial_lag_knn",
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
+    "spherical_voronoi",
     "validate_coordinates",
     "vincenty_distance",
     "vincenty_pairwise",
+    "voronoi_to_geojson",
 ]
