@@ -211,6 +211,28 @@ print(f"Total partitioned area: {voronoi_res.total_area_km2:,.0f} km^2")
 geojson_voronoi = voronoi_to_geojson(voronoi_res)
 ```
 
+### 12. Vectorized Point-in-Polygon (Ray Casting)
+
+```python
+from geostride.geometry import point_in_polygon, points_in_polygons
+
+# Define administrative district polygon [latitude, longitude]
+district_boundary = [
+    [40.70, -74.02],
+    [40.70, -73.97],
+    [40.76, -73.97],
+    [40.76, -74.02],
+]
+
+# High-throughput containment test across thousands of points
+coords = df[["latitude", "longitude"]].values
+in_district_mask = point_in_polygon(coords, district_boundary)
+print(f"Points inside district: {in_district_mask.sum()} / {len(coords)}")
+
+# Multi-polygon spatial indexing with bounding-box pre-filtering
+district_ids = points_in_polygons(coords, [district_boundary])
+```
+
 ---
 
 ## Benchmarks
@@ -242,6 +264,7 @@ geostride/
 ├── features/     # Spatial lags, POI density & scikit-learn transformers
 ├── stats/        # Moran's I, Getis-Ord Gi*, spatial weights
 ├── cluster/      # Spatial DBSCAN & boundary hulls
+├── geometry/     # Point-in-polygon & spatial boundary operations
 ├── io/           # GeoJSON/WKT parsers
 └── viz/          # Interactive map exporters
 ```
@@ -266,7 +289,7 @@ geostride/
 - [x] Convex and concave alpha-shape cluster boundary hull generator
 - [x] GitHub Actions multi-OS test matrix and automated code quality verification
 - [x] Spherical Voronoi diagram generator (`geostride.indexing.voronoi`)
-- [ ] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
+- [x] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
 - [ ] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
 
 ---

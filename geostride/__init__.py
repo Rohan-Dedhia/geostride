@@ -12,6 +12,7 @@ from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
 from geostride.features.splitters import SpatialKFold
+from geostride.geometry.pip import point_in_polygon, points_in_polygons
 from geostride.indexing.geohash import (
     decode_geohash,
     encode_coordinates_geohash,
@@ -94,6 +95,8 @@ __all__ = [
     "inverse_distance_weights",
     "knn_weights",
     "load_geojson",
+    "point_in_polygon",
+    "points_in_polygons",
     "polygon_area_km2",
     "render_html_map",
     "spatial_dbscan",
