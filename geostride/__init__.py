@@ -12,6 +12,7 @@ from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
 from geostride.features.splitters import SpatialKFold
+from geostride.geometry.buffer import buffer_point, buffer_polygon
 from geostride.geometry.pip import point_in_polygon, points_in_polygons
 from geostride.indexing.geohash import (
     decode_geohash,
@@ -73,6 +74,8 @@ __all__ = [
     "__version__",
     "alpha_shape_concave_hull",
     "bin_coordinates_hex",
+    "buffer_point",
+    "buffer_polygon",
     "convex_hull_2d",
     "coord_to_hex_cell",
     "dataframe_to_geojson",

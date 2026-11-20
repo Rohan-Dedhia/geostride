@@ -276,6 +276,22 @@ print(f"High-Low Outliers: {len(lisa_res.high_low)}")
 print(f"Low-High Outliers: {len(lisa_res.low_high)}")
 ```
 
+### 15. Geodesic Polygon Buffering & Boundary Offsets
+
+```python
+from geostride.geometry import buffer_point, buffer_polygon
+
+# Generate exact geodesic circular buffer (e.g., 5 km emergency radius)
+circle_buffer = buffer_point(latitude=40.7128, longitude=-74.0060, distance_km=5.0, n_points=32)
+
+# Dilate delivery zone polygon outward by 2.0 km with smooth rounded corner joins
+zone = [[40.70, -74.00], [40.75, -74.00], [40.75, -73.95], [40.70, -73.95]]
+dilated_zone = buffer_polygon(zone, distance_km=2.0, join_style="round")
+
+# Inward erosion by 1.0 km (contracting hazard perimeter)
+eroded_zone = buffer_polygon(zone, distance_km=-1.0)
+```
+
 ---
 
 ## Benchmarks
@@ -335,8 +351,9 @@ geostride/
 - [x] Vectorized Point-in-Polygon indexer (`geostride.geometry.pip`)
 - [x] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
 - [x] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
-- [ ] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
-- [ ] Vectorized spatial join (`sjoin`) for polygons and point proximity
+- [x] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
+- [ ] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
+- [ ] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
 
 ---
 
