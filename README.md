@@ -316,6 +316,23 @@ nearest_df = spatial_join(
 )
 ```
 
+### 17. Spherical Kernel Density Estimation (KDE)
+
+```python
+from geostride.features import SphericalKDE
+
+# Fit continuous spatial intensity surface with automated Silverman bandwidth
+kde = SphericalKDE(bandwidth_km="silverman", kernel="gaussian")
+kde.fit(df[["latitude", "longitude"]].values)
+print(f"Optimal bandwidth: {kde.bandwidth_km_:.2f} km")
+
+# Evaluate continuous probability density at specific coordinates
+densities = kde.evaluate([[40.7128, -74.0060], [40.7580, -73.9855]])
+
+# Rasterize density surface into a 2D regular grid for heatmap visualization
+lats, lons, density_grid = kde.rasterize(resolution=(100, 100))
+```
+
 ---
 
 ## Benchmarks
@@ -377,8 +394,9 @@ geostride/
 - [x] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
 - [x] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
 - [x] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
-- [ ] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
+- [x] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
 - [ ] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
+- [ ] Spatio-temporal trajectory analytics and speed/heading estimators (`geostride.trajectory.metrics`)
 
 ---
 

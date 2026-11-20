@@ -10,6 +10,7 @@ from geostride.cluster.hulls import (
 )
 from geostride.core.bbox import BoundingBox
 from geostride.core.coordinates import Coordinate, validate_coordinates
+from geostride.features.kde import SphericalKDE
 from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
 from geostride.features.splitters import SpatialKFold
 from geostride.geometry.buffer import buffer_point, buffer_polygon
@@ -71,6 +72,7 @@ __all__ = [
     "SpatialLagTransformer",
     "SpatialRTree",
     "SpatialWeights",
+    "SphericalKDE",
     "SphericalVoronoiResult",
     "__version__",
     "alpha_shape_concave_hull",
