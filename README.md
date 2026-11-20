@@ -7,7 +7,30 @@
 
 **GeoStride** is a lightweight, pure-Python / NumPy & Pandas library for geospatial feature engineering, spatial autocorrelation, spatial clustering, and discrete spatial indexing.
 
-Comprehensive geospatial stacks (such as `geopandas`, `shapely`, and `pyproj`) frequently depend on external compiled C/C++ libraries (`GEOS`, `PROJ`, `GDAL`), which can present installation and dependency challenges in resource-constrained environments (e.g., lightweight serverless functions, minimal Docker containers, or edge deployments). **GeoStride** provides a focused, pure-Python suite of vectorized geospatial utilities built directly on `numpy`, `pandas`, and `scipy`.
+Built directly on `numpy`, `pandas`, and `scipy`, GeoStride provides a focused, deployment-friendly suite of vectorized geospatial utilities with zero external C/C++ build requirements.
+
+---
+
+## Design Philosophy & Ecosystem Positioning
+
+GeoStride is designed to complement—not replace—the mature Python geospatial ecosystem. Choosing the right tool depends on your project's architectural requirements:
+
+### Complementary Ecosystems
+
+- **The Standard GIS Stack (`GeoPandas`, `Shapely`, `PySAL`):**
+  The gold standard for comprehensive GIS workflows. Ideal when your project requires complex Coordinate Reference System (CRS) transformations, Shapefile/GeoPackage disk formats, satellite raster processing, or deep spatial econometric regression.
+- **GeoStride:**
+  A focused, dependency-light toolkit tailored for **serverless environments** (AWS Lambda, Google Cloud Functions), **Docker microservices**, **edge/IoT devices**, and **Scikit-Learn ML pipelines**. It unifies core spatial operations—spatial lags, spatial autocorrelation (Moran's $I$, Getis-Ord $G_i^*$), trajectory kinematics, and self-contained Leaflet exports—into a single, compact package with instant installation.
+
+### When to Use What
+
+| Project Requirement | Recommended Tool | Rationale |
+| :--- | :--- | :--- |
+| **Full GIS & Multi-CRS Workflows** | `GeoPandas` + `PyProj` | Native support for arbitrary map projections, PostGIS, and Shapefiles. |
+| **Serverless & Edge Deployments** | `GeoStride` | Minimal footprint (< 2 MB), zero C-extension conflicts, fast Lambda cold starts. |
+| **Spatial Machine Learning Features** | `GeoStride` | Native Scikit-Learn transformers (`SpatialLagTransformer`, `SpatialKFold`), Morton indexing. |
+| **GPS Trajectory & Mobility Analytics** | `GeoStride` | Built-in kinematics (speed, forward azimuth, turns, acceleration) and Douglas-Peucker reduction. |
+| **Advanced Spatial Econometric Models** | `PySAL` (`spreg`) | Comprehensive spatial two-stage least squares and spatial error/lag regression models. |
 
 ---
 
