@@ -70,6 +70,10 @@ from geostride.trajectory.metrics import (
     resample_trajectory,
     trajectory_kinematics,
 )
+from geostride.trajectory.simplify import (
+    cross_track_distance_meters,
+    simplify_trajectory,
+)
 from geostride.viz.map_export import export_html_map, render_html_map
 
 __all__ = [
@@ -93,6 +97,7 @@ __all__ = [
     "buffer_polygon",
     "convex_hull_2d",
     "coord_to_hex_cell",
+    "cross_track_distance_meters",
     "dataframe_to_geojson",
     "dataframe_to_wkt",
     "decode_geohash",
@@ -125,6 +130,7 @@ __all__ = [
     "polygon_area_km2",
     "render_html_map",
     "resample_trajectory",
+    "simplify_trajectory",
     "spatial_dbscan",
     "spatial_join",
     "spatial_lag_knn",

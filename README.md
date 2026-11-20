@@ -374,6 +374,29 @@ resampled_coords, resampled_ts = resample_trajectory(
 )
 ```
 
+### 20. Spherical Trajectory Simplification (Douglas-Peucker)
+
+```python
+from geostride.trajectory import cross_track_distance_meters, simplify_trajectory
+
+# Simplify noisy GPS trajectory using geodesic cross-track error threshold
+# Reduces redundant collinear points while preserving turns and curves
+simplified_coords = simplify_trajectory(
+    coords=coords,  # shape (N, 2)
+    tolerance_meters=25.0,  # 25-meter cross-track tolerance
+)
+
+print(f"Compressed from {len(coords)} to {len(simplified_coords)} points "
+      f"({(1 - len(simplified_coords) / len(coords)) * 100:.1f}% reduction)")
+
+# Compute great-circle cross-track distance from a point to a geodesic arc segment
+xt_dist = cross_track_distance_meters(
+    lat=40.7300, lon=-73.9950,
+    start_lat=40.7128, start_lon=-74.0060,
+    end_lat=40.7580, end_lon=-73.9855,
+)
+```
+
 ---
 
 ## Benchmarks
@@ -439,7 +462,7 @@ geostride/
 - [x] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
 - [x] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
 - [x] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
-- [ ] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
+- [x] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
 
 ---
 
