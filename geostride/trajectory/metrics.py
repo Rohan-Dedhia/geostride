@@ -73,16 +73,16 @@ class TrajectoryMetrics:
 def _to_epoch_seconds(timestamps: Sequence[Any] | np.ndarray) -> np.ndarray:
     """Convert a sequence of timestamps or numbers into a 1D float array of epoch seconds."""
     if isinstance(timestamps, (pd.Series, pd.DatetimeIndex)):
-        return timestamps.astype("int64").to_numpy(dtype=np.float64) / 1e9
+        return timestamps.to_numpy(dtype="datetime64[ns]").astype(np.float64) / 1e9
 
     if isinstance(timestamps, np.ndarray) and np.issubdtype(timestamps.dtype, np.datetime64):
-        return timestamps.astype("datetime64[ns]").astype("int64").astype(np.float64) / 1e9
+        return timestamps.astype("datetime64[ns]").astype(np.float64) / 1e9
 
     if hasattr(timestamps, "__len__") and len(timestamps) > 0:
         first = timestamps[0]
         if isinstance(first, (str, pd.Timestamp, datetime.datetime, np.datetime64)):
             dt_idx = pd.to_datetime(timestamps)
-            return dt_idx.astype("int64").to_numpy(dtype=np.float64) / 1e9
+            return dt_idx.to_numpy(dtype="datetime64[ns]").astype(np.float64) / 1e9
 
     return np.asarray(timestamps, dtype=np.float64)
 

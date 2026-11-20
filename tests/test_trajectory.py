@@ -133,6 +133,11 @@ class TestTrajectoryKinematics:
         m2 = trajectory_kinematics(coords, pdt)
         assert np.allclose(m2.durations_sec, [60.0, 60.0])
 
+        # Microsecond unit DatetimeIndex (NumPy 2.0 / Pandas 2.2+)
+        pdt_us = pd.date_range("2026-01-01 10:00:00", periods=3, freq="1min", unit="us")
+        m2_us = trajectory_kinematics(coords, pdt_us)
+        assert np.allclose(m2_us.durations_sec, [60.0, 60.0])
+
         # String timestamps
         str_ts = ["2026-01-01 10:00:00", "2026-01-01 10:01:00", "2026-01-01 10:02:00"]
         m3 = trajectory_kinematics(coords, str_ts)
