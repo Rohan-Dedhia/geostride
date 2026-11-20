@@ -292,6 +292,30 @@ dilated_zone = buffer_polygon(zone, distance_km=2.0, join_style="round")
 eroded_zone = buffer_polygon(zone, distance_km=-1.0)
 ```
 
+### 16. Vectorized Spatial Join (sjoin)
+
+```python
+from geostride.geometry import spatial_join
+
+# Point-in-polygon spatial join matching customer coordinates to delivery zones
+joined_df = spatial_join(
+    left_df=df,
+    polygons=[dilated_zone],
+    how="inner",
+    predicate="within",
+    poly_id_col="zone_id",
+)
+
+# Nearest neighbor spatial join computing distance to closest facility
+nearest_df = spatial_join(
+    left_df=df,
+    polygons={"HQ": dilated_zone},
+    how="left",
+    predicate="nearest",
+    distance_col="dist_to_hq_km",
+)
+```
+
 ---
 
 ## Benchmarks
@@ -352,8 +376,9 @@ geostride/
 - [x] Spatial R-Tree nearest neighbor & range indexer (`geostride.indexing.rtree`)
 - [x] Local Indicators of Spatial Association (LISA) quadrant mapping (`geostride.stats.lisa`)
 - [x] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
-- [ ] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
+- [x] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
 - [ ] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
+- [ ] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
 
 ---
 

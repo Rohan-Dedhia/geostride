@@ -14,6 +14,7 @@ from geostride.features.lags import SpatialLagTransformer, spatial_lag_knn
 from geostride.features.splitters import SpatialKFold
 from geostride.geometry.buffer import buffer_point, buffer_polygon
 from geostride.geometry.pip import point_in_polygon, points_in_polygons
+from geostride.geometry.sjoin import spatial_join
 from geostride.indexing.geohash import (
     decode_geohash,
     encode_coordinates_geohash,
@@ -108,6 +109,7 @@ __all__ = [
     "polygon_area_km2",
     "render_html_map",
     "spatial_dbscan",
+    "spatial_join",
     "spatial_lag_knn",
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
