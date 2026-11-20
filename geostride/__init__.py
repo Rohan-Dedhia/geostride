@@ -47,6 +47,12 @@ from geostride.io.geojson import (
     geojson_to_dataframe,
     load_geojson,
 )
+from geostride.io.wkt import (
+    dataframe_to_wkt,
+    from_wkt,
+    to_wkt,
+    wkt_to_dataframe,
+)
 from geostride.metrics.haversine import haversine_matrix, haversine_pairwise
 from geostride.metrics.manhattan import spatial_manhattan_distance, spatial_manhattan_matrix
 from geostride.metrics.vincenty import vincenty_distance, vincenty_pairwise
@@ -82,6 +88,7 @@ __all__ = [
     "convex_hull_2d",
     "coord_to_hex_cell",
     "dataframe_to_geojson",
+    "dataframe_to_wkt",
     "decode_geohash",
     "decode_morton_2d",
     "distance_band_weights",
@@ -91,6 +98,7 @@ __all__ = [
     "encode_geohash",
     "encode_morton_2d",
     "export_html_map",
+    "from_wkt",
     "geohash_bbox",
     "geohash_neighbors",
     "geojson_to_dataframe",
@@ -116,8 +124,10 @@ __all__ = [
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
     "spherical_voronoi",
+    "to_wkt",
     "validate_coordinates",
     "vincenty_distance",
     "vincenty_pairwise",
     "voronoi_to_geojson",
+    "wkt_to_dataframe",
 ]

@@ -333,6 +333,23 @@ densities = kde.evaluate([[40.7128, -74.0060], [40.7580, -73.9855]])
 lats, lons, density_grid = kde.rasterize(resolution=(100, 100))
 ```
 
+### 18. Well-Known Text (WKT) Serialization & DataFrame Parsing
+
+```python
+from geostride.io import dataframe_to_wkt, from_wkt, to_wkt, wkt_to_dataframe
+
+# Convert coordinate array or polygon rings into standard OGC WKT strings
+point_wkt = to_wkt([40.7128, -74.0060])  # "POINT (-74.006 40.7128)"
+line_wkt = to_wkt([[40.71, -74.00], [34.05, -118.24]])  # "LINESTRING (-74 40.71, -118.24 34.05)"
+
+# Parse WKT strings back into geometry type and GeoStride coordinate matrices
+geom_type, rings = from_wkt("POLYGON ((0 0, 10 0, 10 10, 0 10, 0 0))")
+
+# Seamless integration with Pandas DataFrames
+wkt_df = dataframe_to_wkt(df, lat_col="latitude", lon_col="longitude", wkt_col="wkt")
+restored_df = wkt_to_dataframe(wkt_df, wkt_col="wkt")
+```
+
 ---
 
 ## Benchmarks
@@ -395,8 +412,9 @@ geostride/
 - [x] Geodesic polygon buffering and dilation (`geostride.geometry.buffer`)
 - [x] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
 - [x] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
-- [ ] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
-- [ ] Spatio-temporal trajectory analytics and speed/heading estimators (`geostride.trajectory.metrics`)
+- [x] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
+- [ ] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
+- [ ] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
 
 ---
 
