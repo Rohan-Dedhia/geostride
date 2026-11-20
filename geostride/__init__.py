@@ -65,6 +65,11 @@ from geostride.stats.weights import (
     inverse_distance_weights,
     knn_weights,
 )
+from geostride.trajectory.metrics import (
+    TrajectoryMetrics,
+    resample_trajectory,
+    trajectory_kinematics,
+)
 from geostride.viz.map_export import export_html_map, render_html_map
 
 __all__ = [
@@ -80,6 +85,7 @@ __all__ = [
     "SpatialWeights",
     "SphericalKDE",
     "SphericalVoronoiResult",
+    "TrajectoryMetrics",
     "__version__",
     "alpha_shape_concave_hull",
     "bin_coordinates_hex",
@@ -118,6 +124,7 @@ __all__ = [
     "points_in_polygons",
     "polygon_area_km2",
     "render_html_map",
+    "resample_trajectory",
     "spatial_dbscan",
     "spatial_join",
     "spatial_lag_knn",
@@ -125,6 +132,7 @@ __all__ = [
     "spatial_manhattan_matrix",
     "spherical_voronoi",
     "to_wkt",
+    "trajectory_kinematics",
     "validate_coordinates",
     "vincenty_distance",
     "vincenty_pairwise",

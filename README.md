@@ -350,6 +350,30 @@ wkt_df = dataframe_to_wkt(df, lat_col="latitude", lon_col="longitude", wkt_col="
 restored_df = wkt_to_dataframe(wkt_df, wkt_col="wkt")
 ```
 
+### 19. Spatio-Temporal Trajectory Analytics & Resampling
+
+```python
+from geostride.trajectory import resample_trajectory, trajectory_kinematics
+
+# Analyze GPS trajectory kinematics: speed, forward heading, turning angles, and acceleration
+metrics = trajectory_kinematics(
+    coords=[[40.7128, -74.0060], [40.7580, -73.9855], [40.7829, -73.9654]],
+    timestamps=["2026-01-01 10:00:00", "2026-01-01 10:05:00", "2026-01-01 10:12:00"],
+)
+
+print(f"Total distance: {metrics.total_distance_km:.2f} km")
+print(f"Mean speed: {metrics.mean_speed_kmh:.1f} km/h, Max: {metrics.max_speed_kmh:.1f} km/h")
+print(f"Segment headings: {metrics.headings_deg}")
+print(f"Turning angles: {metrics.turning_angles_deg}")
+
+# Resample trajectory to uniform 30-second temporal steps via Spherical Slerp
+resampled_coords, resampled_ts = resample_trajectory(
+    coords=[[40.7128, -74.0060], [40.7829, -73.9654]],
+    timestamps=[0.0, 300.0],
+    step_seconds=30.0,
+)
+```
+
 ---
 
 ## Benchmarks
@@ -382,6 +406,7 @@ geostride/
 ├── stats/        # Moran's I, Getis-Ord Gi*, spatial weights
 ├── cluster/      # Spatial DBSCAN & boundary hulls
 ├── geometry/     # Point-in-polygon & spatial boundary operations
+├── trajectory/   # Trajectory kinematics & spherical resampling
 ├── io/           # GeoJSON/WKT parsers
 └── viz/          # Interactive map exporters
 ```
@@ -413,7 +438,7 @@ geostride/
 - [x] Vectorized spatial join (`sjoin`) for polygons and point proximity (`geostride.geometry.sjoin`)
 - [x] Spherical Kernel Density Estimation (KDE) and heatmap rasterizer (`geostride.features.kde`)
 - [x] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
-- [ ] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
+- [x] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
 - [ ] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
 
 ---
