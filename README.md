@@ -420,6 +420,24 @@ xt_dist = cross_track_distance_meters(
 )
 ```
 
+### 21. Spatial Weights Matrix Standardization
+
+```python
+from geostride.stats import knn_weights, standardize_weights
+
+# Generate KNN spatial weights
+w = knn_weights(coords, k=4, row_standardize=False)
+
+# Standardize connectivity according to modeling requirements:
+w_row = w.standardize("row")        # Rows sum to 1.0 (local neighborhood averages)
+w_bin = w.standardize("binary")     # Binary 0/1 adjacency
+w_spec = w.standardize("spectral")  # Scales by largest eigenvalue (spectral radius = 1.0)
+w_mm = w.standardize("minmax")      # Scales by min(max_row_sum, max_col_sum)
+
+# Or functional interface on raw NumPy adjacency matrices
+std_matrix = standardize_weights(raw_adj_matrix, style="spectral")
+```
+
 ---
 
 ## Benchmarks
@@ -486,6 +504,7 @@ geostride/
 - [x] Well-Known Text (WKT) parser and serializer (`geostride.io.wkt`)
 - [x] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
 - [x] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
+- [x] Spatial weights standardization matrix transformations (`geostride.stats.weights`)
 
 ---
 

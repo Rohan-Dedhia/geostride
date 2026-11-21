@@ -64,6 +64,7 @@ from geostride.stats.weights import (
     distance_band_weights,
     inverse_distance_weights,
     knn_weights,
+    standardize_weights,
 )
 from geostride.trajectory.metrics import (
     TrajectoryMetrics,
@@ -137,6 +138,7 @@ __all__ = [
     "spatial_manhattan_distance",
     "spatial_manhattan_matrix",
     "spherical_voronoi",
+    "standardize_weights",
     "to_wkt",
     "trajectory_kinematics",
     "validate_coordinates",

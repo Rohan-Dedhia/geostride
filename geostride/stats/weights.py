@@ -60,16 +60,106 @@ class SpatialWeights:
         """Whether any observations are isolated with zero neighbors."""
         return len(self.islands) > 0
 
+    def standardize(self, style: str = "row") -> SpatialWeights:
+        """Return a new SpatialWeights instance transformed according to the specified standardization style.
+
+        Parameters
+        ----------
+        style : {"row", "r", "binary", "b", "spectral", "v", "minmax", "m"}, default="row"
+            Standardization style:
+            - "row" / "r": Row-standardization where weights in each row sum to 1.0 (averages neighborhood).
+            - "binary" / "b": Binary connectivity thresholding where all non-zero weights become 1.0.
+            - "spectral" / "v": Rescales weights by the largest eigenvalue lambda_max (spectral radius = 1.0).
+            - "minmax" / "m": Rescales weights by the minimum of maximum row or column sums.
+
+        Returns
+        -------
+        SpatialWeights
+            New standardized spatial weights instance.
+
+        Raises
+        ------
+        ValueError
+            If style is not recognized.
+        """
+        key = style.lower().strip()
+        if key in ("row", "r"):
+            row_sums = np.sum(self.matrix, axis=1, keepdims=True)
+            safe_sums = np.where(row_sums == 0.0, 1.0, row_sums)
+            standardized = self.matrix / safe_sums
+            return SpatialWeights(matrix=standardized, transform="R")
+
+        elif key in ("binary", "b"):
+            standardized = np.where(self.matrix > 0.0, 1.0, 0.0).astype(np.float64)
+            np.fill_diagonal(standardized, 0.0)
+            return SpatialWeights(matrix=standardized, transform="B")
+
+        elif key in ("spectral", "v"):
+            eigs = np.linalg.eigvals(self.matrix)
+            max_eig = float(np.max(np.real(eigs)))
+            if max_eig > 1e-12:
+                standardized = self.matrix / max_eig
+            else:
+                standardized = self.matrix.copy()
+            return SpatialWeights(matrix=standardized, transform="V")
+
+        elif key in ("minmax", "m"):
+            r_max = float(np.max(np.sum(self.matrix, axis=1)))
+            c_max = float(np.max(np.sum(self.matrix, axis=0)))
+            s = min(r_max, c_max)
+            if s > 1e-12:
+                standardized = self.matrix / s
+            else:
+                standardized = self.matrix.copy()
+            return SpatialWeights(matrix=standardized, transform="M")
+
+        else:
+            raise ValueError(
+                f"Unsupported standardization style '{style}'. "
+                "Choose from 'row' ('r'), 'binary' ('b'), 'spectral' ('v'), or 'minmax' ('m')."
+            )
+
+    def set_transform(self, style: str = "row") -> SpatialWeights:
+        """Alias for standardize(style)."""
+        return self.standardize(style)
+
     def row_standardize(self) -> SpatialWeights:
         """Return a new SpatialWeights instance with row-standardized weights (rows sum to 1.0).
 
         For spatial islands (rows summing to 0), weights remain 0 without division-by-zero errors.
         """
-        row_sums = np.sum(self.matrix, axis=1, keepdims=True)
-        # Guard against division by zero on isolated island nodes
-        safe_sums = np.where(row_sums == 0.0, 1.0, row_sums)
-        standardized = self.matrix / safe_sums
-        return SpatialWeights(matrix=standardized, transform="R")
+        return self.standardize("row")
+
+
+def standardize_weights(
+    weights: SpatialWeights | np.ndarray,
+    style: str = "row",
+) -> SpatialWeights | np.ndarray:
+    """Standardize a spatial weight container or square weight matrix.
+
+    Parameters
+    ----------
+    weights : SpatialWeights or np.ndarray of shape (N, N)
+        Spatial weight container or square matrix.
+    style : {"row", "binary", "spectral", "minmax"}, default="row"
+        Standardization style.
+
+    Returns
+    -------
+    SpatialWeights or np.ndarray
+        Standardized weights matching the input type.
+    """
+    if isinstance(weights, SpatialWeights):
+        return weights.standardize(style)
+
+    if isinstance(weights, np.ndarray):
+        w = SpatialWeights(matrix=weights.copy(), transform="B")
+        w_std = w.standardize(style)
+        return w_std.matrix
+
+    raise TypeError(
+        f"weights must be a SpatialWeights container or a NumPy ndarray, got {type(weights).__name__}"
+    )
 
 
 def knn_weights(

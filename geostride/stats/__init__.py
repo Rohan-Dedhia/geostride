@@ -8,6 +8,7 @@ from geostride.stats.weights import (
     distance_band_weights,
     inverse_distance_weights,
     knn_weights,
+    standardize_weights,
 )
 
 __all__ = [
@@ -21,4 +22,5 @@ __all__ = [
     "inverse_distance_weights",
     "knn_weights",
     "local_moran",
+    "standardize_weights",
 ]
