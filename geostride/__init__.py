@@ -75,6 +75,7 @@ from geostride.trajectory.simplify import (
     cross_track_distance_meters,
     simplify_trajectory,
 )
+from geostride.viz.choropleth import export_choropleth_map, render_choropleth_map
 from geostride.viz.map_export import export_html_map, render_html_map
 
 __all__ = [
@@ -109,6 +110,7 @@ __all__ = [
     "encode_coordinates_morton",
     "encode_geohash",
     "encode_morton_2d",
+    "export_choropleth_map",
     "export_html_map",
     "from_wkt",
     "geohash_bbox",
@@ -129,6 +131,7 @@ __all__ = [
     "point_in_polygon",
     "points_in_polygons",
     "polygon_area_km2",
+    "render_choropleth_map",
     "render_html_map",
     "resample_trajectory",
     "simplify_trajectory",

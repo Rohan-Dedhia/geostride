@@ -438,6 +438,22 @@ w_mm = w.standardize("minmax")      # Scales by min(max_row_sum, max_col_sum)
 std_matrix = standardize_weights(raw_adj_matrix, style="spectral")
 ```
 
+### 22. Standalone Interactive Choropleth Maps
+
+```python
+from geostride.viz import export_choropleth_map
+
+# Export colored polygon regions with automated quantile bins and interactive legend
+html_file = export_choropleth_map(
+    polygons=polygons,              # List of polygon coordinate arrays or dict of regions
+    values=z_scores,                # Statistical metrics (e.g. Getis-Ord z-scores)
+    output_path="choropleth.html",  # Self-contained HTML file
+    colormap="viridis",             # "viridis", "plasma", "blues", "reds", "greens", "coolwarm"
+    n_bins=5,
+    title="Spatial Hotspot Choropleth",
+)
+```
+
 ---
 
 ## Benchmarks
@@ -505,6 +521,7 @@ geostride/
 - [x] Spatio-temporal trajectory analytics and kinematics (`geostride.trajectory.metrics`)
 - [x] Spherical trajectory simplification using geodesic Douglas-Peucker (`geostride.trajectory.simplify`)
 - [x] Spatial weights standardization matrix transformations (`geostride.stats.weights`)
+- [x] Standalone interactive Choropleth HTML map exporter (`geostride.viz.choropleth`)
 
 ---
 
